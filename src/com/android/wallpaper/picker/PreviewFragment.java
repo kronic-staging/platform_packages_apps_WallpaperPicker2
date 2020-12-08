@@ -227,16 +227,12 @@ public abstract class PreviewFragment extends Fragment implements
         // Workaround as we don't have access to bottomDialogCornerRadius, mBottomSheet radii are
         // set to dialogCornerRadius by default.
         GradientDrawable bottomSheetBackground = (GradientDrawable) mBottomSheet.getBackground();
-        try {
-            float[] radii = bottomSheetBackground.getCornerRadii();
-            for (int i = 0; i < radii.length; i++) {
-                radii[i]*=2f;
-            }
-            bottomSheetBackground = ((GradientDrawable)bottomSheetBackground.mutate());
-            bottomSheetBackground.setCornerRadii(radii);
-        } catch (NullPointerException npe) {
-           // Log.e(TAG, "cornerRadii not available", npe);
+        float[] radii = bottomSheetBackground.getCornerRadii();
+        for (int i = 0; i < radii.length; i++) {
+            radii[i]*=2f;
         }
+        bottomSheetBackground = ((GradientDrawable)bottomSheetBackground.mutate());
+        bottomSheetBackground.setCornerRadii(radii);
         mBottomSheet.setBackground(bottomSheetBackground);
 
         mBottomSheetInitialState = (savedInstanceState == null) ? STATE_EXPANDED
